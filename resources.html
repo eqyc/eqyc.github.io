@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>资源中心 - EQY 门户网站</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <a href="index.html" class="logo">EQY 门户</a>
+            <button class="mobile-menu-toggle">☰</button>
+            <nav>
+                <ul>
+                    <li><a href="index.html">首页</a></li>
+                    <li><a href="modules.html">模块介绍</a></li>
+                    <li><a href="cases.html">实践案例</a></li>
+                    <li><a href="resources.html" class="active">资源中心</a></li>
+                    <li><a href="about.html">关于我们</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="resource-header">
+            <div class="container">
+                <h1>资源中心</h1>
+                <p>丰富的学习资料和实用工具，助您深入掌握企业管理系统</p>
+            </div>
+        </section>
+
+        <section class="resource-categories section">
+            <div class="container">
+                <div class="category-tabs">
+                    <button class="tab-button active" data-category="all">全部资源</button>
+                    <button class="tab-button" data-category="docs">文档资料</button>
+                    <button class="tab-button" data-category="tools">实用工具</button>
+                    <button class="tab-button" data-category="templates">模板下载</button>
+                    <button class="tab-button" data-category="videos">视频教程</button>
+                    <button class="tab-button" data-category="guides">操作指南</button>
+                </div>
+
+                <div class="resource-grid">
+                    <!-- 文档资料 -->
+                    <div class="resource-item" data-category="docs">
+                        <div class="resource-icon">
+                            <i class="fas fa-file-alt"></i>
+                        </div>
+                        <h3>财务管理最佳实践指南</h3>
+                        <p>详细介绍财务各子模块的应用场景和配置要点</p>
+                        <a href="#" class="download-btn">下载文档</a>
+                    </div>
+
+                    <div class="resource-item" data-category="docs">
+                        <div class="resource-icon">
+                            <i class="fas fa-file-alt"></i>
+                        </div>
+                        <h3>采购到付款流程白皮书</h3>
+                        <p>从采购申请到供应商付款的完整流程解析</p>
+                        <a href="#" class="download-btn">下载文档</a>
+                    </div>
+
+                    <div class="resource-item" data-category="docs">
+                        <div class="resource-icon">
+                            <i class="fas fa-file-alt"></i>
+                        </div>
+                        <h3>订单到收款流程手册</h3>
+                        <p>销售订单处理、发货和收款的全流程操作指南</p>
+                        <a href="#" class="download-btn">下载文档</a>
+                    </div>
+
+                    <!-- 实用工具 -->
+                    <div class="resource-item" data-category="tools">
+                        <div class="resource-icon">
+                            <i class="fas fa-tools"></i>
+                        </div>
+                        <h3>BOM导入模板工具</h3>
+                        <p>批量导入产品BOM结构的Excel模板和校验工具</p>
+                        <a href="#" class="download-btn">下载工具</a>
+                    </div>
+
+                    <div class="resource-item" data-category="tools">
+                        <div class="resource-icon">
+                            <i class="fas fa-tools"></i>
+                        </div>
+                        <h3>库存分析仪表板</h3>
+                        <p>Excel格式的库存分析模板，支持多维度数据分析</p>
+                        <a href="#" class="download-btn">下载工具</a>
+                    </div>
+
+                    <!-- 模板下载 -->
+                    <div class="resource-item" data-category="templates">
+                        <div class="resource-icon">
+                            <i class="fas fa-copy"></i>
+                        </div>
+                        <h3>财务报表模板集</h3>
+                        <p>包含资产负债表、利润表、现金流量表的标准模板</p>
+                        <a href="#" class="download-btn">下载模板</a>
+                    </div>
+
+                    <div class="resource-item" data-category="templates">
+                        <div class="resource-icon">
+                            <i class="fas fa-copy"></i>
+                        </div>
+                        <h3>采购合同模板</h3>
+                        <p>标准采购合同Word模板，支持自定义条款</p>
+                        <a href="#" class="download-btn">下载模板</a>
+                    </div>
+
+                    <!-- 视频教程 -->
+                    <div class="resource-item" data-category="videos">
+                        <div class="resource-icon">
+                            <i class="fas fa-video"></i>
+                        </div>
+                        <h3>系统基础操作入门</h3>
+                        <p>系统界面导航、基本操作和常用功能介绍</p>
+                        <a href="#" class="watch-btn">观看视频</a>
+                    </div>
+
+                    <div class="resource-item" data-category="videos">
+                        <div class="resource-icon">
+                            <i class="fas fa-video"></i>
+                        </div>
+                        <h3>财务月结操作流程</h3>
+                        <p>月末财务结账的标准操作步骤和注意事项</p>
+                        <a href="#" class="watch-btn">观看视频</a>
+                    </div>
+
+                    <!-- 操作指南 -->
+                    <div class="resource-item" data-category="guides">
+                        <div class="resource-icon">
+                            <i class="fas fa-book"></i>
+                        </div>
+                        <h3>生产计划操作手册</h3>
+                        <p>MRP运算、计划订单生成和下达的详细操作步骤</p>
+                        <a href="#" class="download-btn">下载指南</a>
+                    </div>
+
+                    <div class="resource-item" data-category="guides">
+                        <div class="resource-icon">
+                            <i class="fas fa-book"></i>
+                        </div>
+                        <h3>质量管理实施指南</h3>
+                        <p>质量检验、不合格品处理和质量改进的操作规范</p>
+                        <a href="#" class="download-btn">下载指南</a>
+                    </div>
+                    
+                    <!-- 新增资源 -->
+                    <div class="resource-item" data-category="docs">
+                        <div class="resource-icon">
+                            <i class="fas fa-file-alt"></i>
+                        </div>
+                        <h3>设备管理操作手册</h3>
+                        <p>设备台账、维修保养、备件管理等全流程操作说明</p>
+                        <a href="#" class="download-btn">下载文档</a>
+                    </div>
+                    
+                    <div class="resource-item" data-category="templates">
+                        <div class="resource-icon">
+                            <i class="fas fa-copy"></i>
+                        </div>
+                        <h3>项目管理模板包</h3>
+                        <p>包含项目立项、计划、执行、评估各阶段的标准模板</p>
+                        <a href="#" class="download-btn">下载模板</a>
+                    </div>
+                    
+                    <div class="resource-item" data-category="tools">
+                        <div class="resource-icon">
+                            <i class="fas fa-tools"></i>
+                        </div>
+                        <h3>数据分析工具包</h3>
+                        <p>Excel插件和Python脚本，支持财务和业务数据分析</p>
+                        <a href="#" class="download-btn">下载工具</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="faq-section section">
+            <div class="container">
+                <h2 class="section-title">常见问题解答</h2>
+                <div class="faq-list">
+                    <div class="faq-item">
+                        <h3><i class="fas fa-question-circle"></i> 如何获取系统访问权限？</h3>
+                        <p>请联系您的系统管理员或IT部门，他们会为您创建相应的用户账户并分配权限。</p>
+                    </div>
+                    <div class="faq-item">
+                        <h3><i class="fas fa-question-circle"></i> 在哪里可以找到最新的系统文档？</h3>
+                        <p>最新版本的系统文档可以在本资源中心下载，我们会定期更新以反映系统变化。</p>
+                    </div>
+                    <div class="faq-item">
+                        <h3><i class="fas fa-question-circle"></i> 遇到系统问题应该联系谁？</h3>
+                        <p>如果遇到技术问题，请联系IT服务台；如果是业务流程问题，请联系相关部门的系统负责人。</p>
+                    </div>
+                    <div class="faq-item">
+                        <h3><i class="fas fa-question-circle"></i> 如何参加系统培训？</h3>
+                        <p>我们定期组织系统培训课程，具体安排会通过公司内网和邮件通知，请关注相关信息。</p>
+                    </div>
+                    <div class="faq-item">
+                        <h3><i class="fas fa-question-circle"></i> 系统数据如何备份和恢复？</h3>
+                        <p>系统数据由IT部门统一进行备份管理，每日增量备份，每周全量备份，保留30天历史数据。</p>
+                    </div>
+                    <div class="faq-item">
+                        <h3><i class="fas fa-question-circle"></i> 如何提出系统功能改进建议？</h3>
+                        <p>可通过内部系统需求管理平台提交功能改进建议，我们将定期评估并纳入系统升级计划。</p>
+                    </div>
+                    <div class="faq-item">
+                        <h3><i class="fas fa-question-circle"></i> 移动端应用支持哪些功能？</h3>
+                        <p>移动端支持审批、查询、报表查看等核心功能，具体功能列表请参考移动端用户手册。</p>
+                    </div>
+                    <div class="faq-item">
+                        <h3><i class="fas fa-question-circle"></i> 系统集成开发需要哪些技术资料？</h3>
+                        <p>集成开发需要API接口文档、数据字典和技术规范，可在开发者专区下载相关资料。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 EQY 门户网站. 保留所有权利.</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
