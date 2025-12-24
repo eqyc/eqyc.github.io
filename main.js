@@ -95,13 +95,6 @@ function initializeSiteInteractions() {
         if (!docDataCache && window.DOCS_DATA) {
             docDataCache = window.DOCS_DATA;
         }
-        if (window.marked && window.marked.setOptions) {
-            window.marked.setOptions({
-                breaks: true,
-                gfm: true
-            });
-        }
-        
         const docTitle = document.getElementById('doc-title');
         const docSourceLink = document.getElementById('doc-source-link');
         
@@ -111,10 +104,10 @@ function initializeSiteInteractions() {
         };
         
         const renderMarkdown = (text) => {
-            if (window.marked) {
+            if (window.marked && typeof window.marked.parse === 'function') {
                 return window.marked.parse(text);
             }
-            return `<pre>${text}</pre>`;
+            return basicMarkdownToHtml(text);
         };
         
         const loadDoc = async (targetLink) => {
@@ -184,6 +177,110 @@ if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initializeSiteInteractions);
 } else {
     initializeSiteInteractions();
+}
+
+// 简易 Markdown 渲染（在无法加载第三方库时使用）
+function basicMarkdownToHtml(text) {
+    if (!text) return '';
+    
+    const escapeHtml = (str) => str
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    
+    const formatInline = (input) => {
+        let output = escapeHtml(input);
+        output = output.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+        output = output.replace(/\*(.+?)\*/g, '<em>$1</em>');
+        output = output.replace(/`([^`]+)`/g, (_, code) => `<code>${escapeHtml(code)}</code>`);
+        output = output.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
+        return output;
+    };
+    
+    const codeBlocks = [];
+    let processed = text.replace(/```([\s\S]*?)```/g, (_, code) => {
+        const placeholder = `@@CODE_BLOCK_${codeBlocks.length}@@`;
+        codeBlocks.push(`<pre><code>${escapeHtml(code.trimEnd())}</code></pre>`);
+        return placeholder;
+    });
+    
+    const lines = processed.split('\n');
+    let html = '';
+    let inUl = false;
+    let inOl = false;
+    
+    const closeLists = () => {
+        if (inUl) {
+            html += '</ul>';
+            inUl = false;
+        }
+        if (inOl) {
+            html += '</ol>';
+            inOl = false;
+        }
+    };
+    
+    lines.forEach(line => {
+        const trimmed = line.trim();
+        
+        if (!trimmed) {
+            closeLists();
+            html += '<br />';
+            return;
+        }
+        
+        const headingMatch = line.match(/^(#{1,6})\s+(.*)$/);
+        if (headingMatch) {
+            closeLists();
+            const level = headingMatch[1].length;
+            html += `<h${level}>${formatInline(headingMatch[2])}</h${level}>`;
+            return;
+        }
+        
+        if (/^>\s+/.test(line)) {
+            closeLists();
+            html += `<blockquote>${formatInline(line.replace(/^>\s+/, ''))}</blockquote>`;
+            return;
+        }
+        
+        if (/^\s*[-*+]\s+/.test(line)) {
+            if (!inUl) {
+                closeLists();
+                html += '<ul>';
+                inUl = true;
+            }
+            html += `<li>${formatInline(line.replace(/^\s*[-*+]\s+/, ''))}</li>`;
+            return;
+        }
+        
+        if (/^\s*\d+\.\s+/.test(line)) {
+            if (!inOl) {
+                closeLists();
+                html += '<ol>';
+                inOl = true;
+            }
+            html += `<li>${formatInline(line.replace(/^\s*\d+\.\s+/, ''))}</li>`;
+            return;
+        }
+        
+        if (/^---+$/.test(trimmed)) {
+            closeLists();
+            html += '<hr />';
+            return;
+        }
+        
+        html += `<p>${formatInline(line)}</p>`;
+    });
+    
+    closeLists();
+    
+    codeBlocks.forEach((block, idx) => {
+        html = html.replace(`@@CODE_BLOCK_${idx}@@`, block);
+    });
+    
+    return html;
 }
 
 // 图片加载错误处理
