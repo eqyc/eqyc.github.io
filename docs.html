@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文档中心 - EQY 门户网站</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <a href="index.html" class="logo">EQY 门户</a>
+            <button class="mobile-menu-toggle">☰</button>
+            <nav>
+                <ul>
+                    <li><a href="index.html">首页</a></li>
+                    <li><a href="modules.html">模块介绍</a></li>
+                    <li><a href="cases.html">实践案例</a></li>
+                    <li><a href="resources.html">资源中心</a></li>
+                    <li><a href="docs.html" class="active">文档中心</a></li>
+                    <li><a href="about.html">关于我们</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="docs-hero">
+            <div class="container">
+                <p class="section-subtitle">Markdown 文档库</p>
+                <h1>Rust ERP 项目知识库</h1>
+                <p class="docs-hero-desc">将 md 目录下的全部项目文档集中展示，点击左侧文档即可在右侧阅读，也可以一键打开原始 Markdown 文件。</p>
+            </div>
+        </section>
+
+        <section class="docs-section">
+            <div class="container">
+                <div class="docs-layout">
+                    <aside class="docs-sidebar">
+                        <div class="docs-sidebar-header">
+                            <h2>全部文档</h2>
+                            <p>点击加载对应的 Markdown 内容</p>
+                        </div>
+                        <div class="doc-list">
+                            <button class="doc-link active" data-file="md/README-Nav.md" data-title="项目文档导航"><i class="fas fa-map-signs"></i> 项目文档导航</button>
+                            <button class="doc-link" data-file="md/Rust-Open.md" data-title="开发环境搭建指南"><i class="fas fa-server"></i> 开发环境搭建指南</button>
+                            <button class="doc-link" data-file="md/Rust-Open-Check.md" data-title="环境检查清单"><i class="fas fa-clipboard-check"></i> 环境检查清单</button>
+                            <button class="doc-link" data-file="md/Parts-A-Open.md" data-title="附录A - 环境搭建详解"><i class="fas fa-tools"></i> 附录A - 环境搭建详解</button>
+                            <button class="doc-link" data-file="md/Parts-B-Bom.md" data-title="附录B - BOM 清单"><i class="fas fa-list"></i> 附录B - BOM 清单</button>
+                            <button class="doc-link" data-file="md/Rust-Abc.md" data-title="Rust ERP 核心概念"><i class="fas fa-book"></i> Rust ERP 核心概念</button>
+                            <button class="doc-link" data-file="md/Rust-Abc-Enhanced.md" data-title="Rust ERP 核心概念（增强版）"><i class="fas fa-layer-group"></i> 核心概念（增强版）</button>
+                            <button class="doc-link" data-file="md/Rust-Dir.md" data-title="目录与结构约定"><i class="fas fa-folder-open"></i> 目录与结构约定</button>
+                            <button class="doc-link" data-file="md/rust-Modules.md" data-title="业务模块说明"><i class="fas fa-stream"></i> 业务模块说明</button>
+                            <button class="doc-link" data-file="md/Rust-Microservices.md" data-title="微服务架构设计"><i class="fas fa-project-diagram"></i> 微服务架构设计</button>
+                            <button class="doc-link" data-file="md/Rust-Domain-Specifications.md" data-title="领域规范说明"><i class="fas fa-drafting-compass"></i> 领域规范说明</button>
+                            <button class="doc-link" data-file="md/Rust-Api.md" data-title="平台 API 文档"><i class="fas fa-code"></i> 平台 API 文档</button>
+                            <button class="doc-link" data-file="md/Rust-BOM.md" data-title="BOM 结构指南"><i class="fas fa-sitemap"></i> BOM 结构指南</button>
+                            <button class="doc-link" data-file="md/Rust-Build.md" data-title="构建与发布指南"><i class="fas fa-industry"></i> 构建与发布指南</button>
+                            <button class="doc-link" data-file="md/Rust-Implementation-Guide.md" data-title="实施路线图"><i class="fas fa-route"></i> 实施路线图</button>
+                            <button class="doc-link" data-file="md/Rust-Data.md" data-title="数据模型与治理"><i class="fas fa-database"></i> 数据模型与治理</button>
+                            <button class="doc-link" data-file="md/Rust-Sql.md" data-title="SQL 模型与示例"><i class="fas fa-database"></i> SQL 模型与示例</button>
+                            <button class="doc-link" data-file="md/Rust-Git.md" data-title="Git 协作规范"><i class="fas fa-code-branch"></i> Git 协作规范</button>
+                        </div>
+                    </aside>
+                    <div class="docs-content">
+                        <div class="doc-viewer-header">
+                            <div>
+                                <p class="doc-label">当前文档</p>
+                                <h2 id="doc-title">项目文档导航</h2>
+                            </div>
+                            <a id="doc-source-link" class="doc-open-link" href="md/README-Nav.md" target="_blank" rel="noopener">打开 Markdown</a>
+                        </div>
+                        <div id="doc-content" class="doc-content-body">
+                            <p class="doc-placeholder">正在加载《项目文档导航》，如果长时间未显示，请检查网络或尝试重新点击左侧文档。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 EQY 门户网站. 保留所有权利.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="js/docs-data.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

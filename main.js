@@ -1,5 +1,5 @@
 // 主导航菜单交互
-document.addEventListener('DOMContentLoaded', function() {
+function initializeSiteInteractions() {
     // 资源中心页面的标签切换功能
     const tabButtons = document.querySelectorAll('.tab-button');
     const resourceItems = document.querySelectorAll('.resource-item');
@@ -76,7 +76,115 @@ document.addEventListener('DOMContentLoaded', function() {
             this.style.transform = 'translateY(0)';
         });
     });
-});
+    
+    // 文档中心 Markdown 加载
+    const docLinks = document.querySelectorAll('.doc-link');
+    const docContent = document.getElementById('doc-content');
+    
+    if (docLinks.length > 0 && docContent) {
+        let docDataCache = null;
+        const inlineDocData = document.getElementById('docs-data');
+        if (inlineDocData) {
+            try {
+                docDataCache = JSON.parse(inlineDocData.textContent);
+            } catch (error) {
+                console.error('解析嵌入的文档数据失败', error);
+            }
+        }
+        
+        if (!docDataCache && window.DOCS_DATA) {
+            docDataCache = window.DOCS_DATA;
+        }
+        if (window.marked && window.marked.setOptions) {
+            window.marked.setOptions({
+                breaks: true,
+                gfm: true
+            });
+        }
+        
+        const docTitle = document.getElementById('doc-title');
+        const docSourceLink = document.getElementById('doc-source-link');
+        
+        const setActiveLink = (targetLink) => {
+            docLinks.forEach(link => link.classList.remove('active'));
+            targetLink.classList.add('active');
+        };
+        
+        const renderMarkdown = (text) => {
+            if (window.marked) {
+                return window.marked.parse(text);
+            }
+            return `<pre>${text}</pre>`;
+        };
+        
+        const loadDoc = async (targetLink) => {
+            if (!targetLink) return;
+            
+            setActiveLink(targetLink);
+            const filePath = targetLink.getAttribute('data-file');
+            const title = targetLink.getAttribute('data-title') || targetLink.textContent.trim();
+            
+            if (docTitle) {
+                docTitle.textContent = title;
+            }
+            
+            if (docSourceLink && filePath) {
+                docSourceLink.href = filePath;
+                docSourceLink.classList.remove('disabled');
+            }
+            
+            docContent.innerHTML = '<p class="doc-loading">文档加载中，请稍候...</p>';
+            
+            const embeddedDoc = docDataCache ? docDataCache[filePath] : null;
+            if (embeddedDoc) {
+                docContent.innerHTML = renderMarkdown(embeddedDoc);
+                docContent.scrollTop = 0;
+                return;
+            }
+            
+            try {
+                const response = await fetch(filePath);
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}`);
+                }
+                
+                const markdown = await response.text();
+                docContent.innerHTML = renderMarkdown(markdown);
+                docContent.scrollTop = 0;
+            } catch (error) {
+                console.error('文档加载失败', error);
+                if (location.protocol === 'file:') {
+                    const fallbackWrapper = document.createElement('div');
+                    fallbackWrapper.className = 'doc-fallback';
+                    fallbackWrapper.innerHTML = '<p class=\"doc-error\">无法直接读取本地 Markdown，已切换为原始文件预览模式。</p>';
+                    
+                    const iframe = document.createElement('iframe');
+                    iframe.src = filePath;
+                    iframe.className = 'doc-fallback-frame';
+                    iframe.setAttribute('title', `${title} 原始内容`);
+                    
+                    fallbackWrapper.appendChild(iframe);
+                    docContent.innerHTML = '';
+                    docContent.appendChild(fallbackWrapper);
+                } else {
+                    docContent.innerHTML = `<div class="doc-error">文档加载失败：${error.message}</div>`;
+                }
+            }
+        };
+        
+        docLinks.forEach(link => {
+            link.addEventListener('click', () => loadDoc(link));
+        });
+        
+        loadDoc(document.querySelector('.doc-link.active') || docLinks[0]);
+    }
+}
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initializeSiteInteractions);
+} else {
+    initializeSiteInteractions();
+}
 
 // 图片加载错误处理
 document.addEventListener('error', function(e) {
